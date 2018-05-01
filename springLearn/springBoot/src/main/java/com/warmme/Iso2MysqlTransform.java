@@ -34,7 +34,7 @@ public class Iso2MysqlTransform {
 	private static void init() {
 		for (int i = 0; i < iso2Array.length; i++) {
 			for (int j = 0; j < iso2Array[i].length; j++) {
-				int index = ((i << 8) + j);// ¸ß8Î»±íÊ¾ÐÐÊý£¬µÍ8Î»±íÊ¾ÁÐÊý
+				int index = ((i << 8) + j);// ï¿½ï¿½8Î»ï¿½ï¿½Ê¾ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½8Î»ï¿½ï¿½Ê¾ï¿½ï¿½ï¿½ï¿½
 				iso2IndexMap.put(iso2Array[i][j], index);
 			}
 		}
@@ -52,8 +52,8 @@ public class Iso2MysqlTransform {
 				String iso2 = iso2Arra[i];
 				Integer index = iso2IndexMap.get(iso2);
 				if (index != null) {
-					int row = (index.intValue() >> 8);// ÓÒÒÆ¶¯8Î»µÃµ½ÐÐÊý
-					int column = index.intValue() & 0x00FF;// ¶ÔµÍ8Î»°´Î»ÓëµÃµ½ÁÐÊý
+					int row = (index.intValue() >> 8);// ï¿½ï¿½ï¿½Æ¶ï¿½8Î»ï¿½Ãµï¿½ï¿½ï¿½ï¿½ï¿½
+					int column = index.intValue() & 0x00FF;// ï¿½Ôµï¿½8Î»ï¿½ï¿½Î»ï¿½ï¿½Ãµï¿½ï¿½ï¿½ï¿½ï¿½
 					iso2MysqlMap.addIso2(iso2, row+1, column);
 					
 				}
@@ -73,7 +73,7 @@ public class Iso2MysqlTransform {
 		for(int i=0;i<1000000;i++) {
 		 result = map("AD,CV,EE");
 		}
-		System.err.println("ºÄÊ±£º"+(System.currentTimeMillis()-now));
+		System.err.println("è€—æ—¶"+(System.currentTimeMillis()-now));
 		System.err.println(JSONObject.toJSON(result));
 	}
 

@@ -1,6 +1,8 @@
 package com.warmme;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import com.alibaba.fastjson.JSONObject;
@@ -63,15 +65,39 @@ public class Iso2MysqlTransform3 {
 		return iso2Arr;
 	}
 
+	public static String[][] map(List<String> iso2s) {
+
+		String[][] iso2Arr = new String[4][64];
+		if (iso2s == null || iso2s.isEmpty()) {
+			return iso2Arr;
+		}
+		
+		for(String iso2:iso2s) {
+			Integer index = iso2IndexMap.get(iso2);
+			if (index != null) {
+				int row = (index.intValue() >> 8);// 右移动8位得到行数
+				int column = index.intValue() & 0x00FF;// 对低8位按位与得到列数
+				iso2Arr[row][column] = iso2;
+				
+			}
+		}
+		return iso2Arr;
+	}
+	
 	public static void main(String[] args) {
 		System.err.println(Long.toBinaryString(524289));
 
 		System.err.println(1L << 62);
 		
+		List<String> iso2List = new ArrayList<String>();
+		iso2List.add("AD");
+		iso2List.add("CV");
+		iso2List.add("EE");
+		
 		String[][] result = null;
 		long now = System.currentTimeMillis();
 		for(int i=0;i<1000000;i++) {
-		 result = map("AD,CV,EE");
+		 result = map(iso2List);
 		}
 		System.err.println("耗时"+(System.currentTimeMillis()-now));
 		System.err.println(JSONObject.toJSON(result));
